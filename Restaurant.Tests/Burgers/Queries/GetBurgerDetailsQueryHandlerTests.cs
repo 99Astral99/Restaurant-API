@@ -23,10 +23,10 @@ namespace Restaurant.Tests.Burgers.Queries
 		{
 			//Arrange
 			var handler = new GetBurgerDetailsQueryHandler(Mapper, Context);
-
+			var requiredBurgerId = 11;
 			//Act
 			var result = await handler.Handle(
-				new GetBurgerDetailsQuery(2), 
+				new GetBurgerDetailsQuery(requiredBurgerId), 
 				CancellationToken.None);
 
 			//Assert

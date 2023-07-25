@@ -8,8 +8,8 @@ namespace Restaurant.Tests.Common.Burgers
     {
         public static Random rnd = new Random();
 
-        public static int BurgerIdForDelete = rnd.Next(5, 100);
-        public static int BurgerIdForUpdate = rnd.Next(5, 100);
+        public static int BurgerIdForDelete = rnd.Next(100, 1000);
+        public static int BurgerIdForUpdate = rnd.Next(100, 1000);
         public static ProductDbContext Create()
         {
             var options = new DbContextOptionsBuilder<ProductDbContext>()
@@ -21,7 +21,7 @@ namespace Restaurant.Tests.Common.Burgers
             context.Burgers.AddRange(
                 new Burger()
                 {
-                    Id = 1,
+                    Id = 10,
                     Description = "Test1",
                     Name = "Burger1",
                     Price = 3.5,
@@ -29,7 +29,7 @@ namespace Restaurant.Tests.Common.Burgers
                 },
                 new Burger()
                 {
-                    Id = 2,
+                    Id = 11,
                     Description = "Test2",
                     Name = "Burger2",
                     Price = 2.5,

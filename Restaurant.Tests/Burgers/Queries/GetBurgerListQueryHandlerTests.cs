@@ -22,14 +22,13 @@ namespace Restaurant.Tests.Burgers.Queries
 		{
 			//Arrange
 			var handler = new GetBurgerListQueryHandler(Mapper, Context);
-
 			//Act
 			var result = await handler.Handle(
 				new GetBurgerListQuery(), 
 				CancellationToken.None);
 			//Assert
 			result.ShouldBeOfType<BurgerListVm>();
-			result.Burgers.Count.ShouldBe(4);
+			result.Burgers.Count.ShouldBe(Context.Burgers.Count());
 		}
 	}
 }
