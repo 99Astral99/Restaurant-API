@@ -14,21 +14,6 @@ namespace Restaraunt.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Burgers",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Burgers",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Burgers",
-                keyColumn: "Id",
-                keyValue: 3);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -68,6 +53,39 @@ namespace Restaraunt.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Burgers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Weight = table.Column<int>(type: "integer", maxLength: 1000, nullable: false),
+                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "character varying(700)", maxLength: 700, nullable: false),
+                    Price = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Burgers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Drinks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Size = table.Column<int>(type: "integer", maxLength: 1500, nullable: false),
+                    IsCarbonated = table.Column<bool>(type: "boolean", nullable: false),
+                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "character varying(700)", maxLength: 700, nullable: false),
+                    Price = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Drinks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,6 +194,35 @@ namespace Restaraunt.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("417ea524-3412-4929-8533-74354e887cc5"), "417EA524-3412-4929-8533-74354E887CC5", "Admin", "ADMIN" },
+                    { new Guid("76ba16a2-158a-46ef-89e7-24e8684aab20"), "76BA16A2-158A-46EF-89E7-24E8684AAB20", "Customer", "CUSTOMER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Burgers",
+                columns: new[] { "Id", "Description", "Name", "Price", "Weight" },
+                values: new object[,]
+                {
+                    { 1, "Chicken lovers will appreciate the novelty Caesar King! Juicy crispy chicken nuggets, fresh tomato and lettuce are seasoned with Caesar sauce and served on a browned sesame bun.", "Hamburger", 1.3300000000000001, 105 },
+                    { 2, "This is a spicy version of juicy Grand Cheese — with a burning sauce instead of ketchup! Homemade beef steak with the addition of juicy chicken — in your favorite combination with Cheddar cheese, pickled cucumbers, onions, mustard and spicy tomato sauce on a browned sesame bun!", "Spicy Grand Cheese", 2.3199999999999998, 171 },
+                    { 3, "Whopper - is delicious 100% beef cooked on fire with juicy tomatoes, fresh chopped lettuce, thick mayonnaise, crispy pickled cucumbers and fresh onions on a tender sesame bun.", "Triple Whopper", 4.0, 426 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Drinks",
+                columns: new[] { "Id", "Description", "IsCarbonated", "Name", "Price", "Size" },
+                values: new object[,]
+                {
+                    { 1, "A fragrant coffee drink with a delicate milk foam.", false, "Capuccino", 1.75, 100 },
+                    { 2, "Natural freshly brewed coffee with ice cream.", false, "Coffee glace", 1.55, 100 },
+                    { 3, "A reall fresh beer.", true, "Beer", 3.0, 500 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -212,6 +259,18 @@ namespace Restaraunt.Persistence.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Burgers_Id",
+                table: "Burgers",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Drinks_Id",
+                table: "Drinks",
+                column: "Id",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -233,20 +292,16 @@ namespace Restaraunt.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Burgers");
+
+            migrationBuilder.DropTable(
+                name: "Drinks");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.InsertData(
-                table: "Burgers",
-                columns: new[] { "Id", "Description", "Name", "Price", "Weight" },
-                values: new object[,]
-                {
-                    { 1, "Chicken lovers will appreciate the novelty Caesar King! Juicy crispy chicken nuggets, fresh tomato and lettuce are seasoned with Caesar sauce and served on a browned sesame bun.", "Hamburger", 1.3300000000000001, 105 },
-                    { 2, "This is a spicy version of juicy Grand Cheese — with a burning sauce instead of ketchup! Homemade beef steak with the addition of juicy chicken — in your favorite combination with Cheddar cheese, pickled cucumbers, onions, mustard and spicy tomato sauce on a browned sesame bun!", "Spicy Grand Cheese", 2.3199999999999998, 171 },
-                    { 3, "Whopper - is delicious 100% beef cooked on fire with juicy tomatoes, fresh chopped lettuce, thick mayonnaise, crispy pickled cucumbers and fresh onions on a tender sesame bun.", "Triple Whopper", 4.0, 426 }
-                });
         }
     }
 }

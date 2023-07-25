@@ -20,7 +20,25 @@ namespace Restaraunt.Persistence
 		{
 			builder.ApplyConfiguration(new DrinkTypeConfiguration());
 			builder.ApplyConfiguration(new BurgerTypeConfiguration());
-			builder.ApplyConfiguration(new UserTypeConfiguration());
+			//builder.ApplyConfiguration(new UserTypeConfiguration());
+			builder.Entity<IdentityRole<Guid>>().HasData(
+				new IdentityRole<Guid>
+				{
+					Id = new Guid("76BA16A2-158A-46EF-89E7-24E8684AAB20"),
+					Name = "Customer",
+					NormalizedName = "CUSTOMER",
+					ConcurrencyStamp = "76BA16A2-158A-46EF-89E7-24E8684AAB20"
+				});
+
+			builder.Entity<IdentityRole<Guid>>().HasData(
+				new IdentityRole<Guid>
+				{
+					Id = new Guid("417EA524-3412-4929-8533-74354E887CC5"),
+					Name = "Admin",
+					NormalizedName = "ADMIN",
+					ConcurrencyStamp = "417EA524-3412-4929-8533-74354E887CC5"
+				});
+
 			base.OnModelCreating(builder);
 		}
 	}

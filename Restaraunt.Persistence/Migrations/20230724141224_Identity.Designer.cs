@@ -12,7 +12,7 @@ using Restaraunt.Persistence;
 namespace Restaraunt.Persistence.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20230723073809_Identity")]
+    [Migration("20230724141224_Identity")]
     partial class Identity
     {
         /// <inheritdoc />
@@ -50,6 +50,22 @@ namespace Restaraunt.Persistence.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("76ba16a2-158a-46ef-89e7-24e8684aab20"),
+                            ConcurrencyStamp = "76BA16A2-158A-46EF-89E7-24E8684AAB20",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = new Guid("417ea524-3412-4929-8533-74354e887cc5"),
+                            ConcurrencyStamp = "417EA524-3412-4929-8533-74354E887CC5",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -186,6 +202,32 @@ namespace Restaraunt.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Burgers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Chicken lovers will appreciate the novelty Caesar King! Juicy crispy chicken nuggets, fresh tomato and lettuce are seasoned with Caesar sauce and served on a browned sesame bun.",
+                            Name = "Hamburger",
+                            Price = 1.3300000000000001,
+                            Weight = 105
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "This is a spicy version of juicy Grand Cheese — with a burning sauce instead of ketchup! Homemade beef steak with the addition of juicy chicken — in your favorite combination with Cheddar cheese, pickled cucumbers, onions, mustard and spicy tomato sauce on a browned sesame bun!",
+                            Name = "Spicy Grand Cheese",
+                            Price = 2.3199999999999998,
+                            Weight = 171
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Whopper - is delicious 100% beef cooked on fire with juicy tomatoes, fresh chopped lettuce, thick mayonnaise, crispy pickled cucumbers and fresh onions on a tender sesame bun.",
+                            Name = "Triple Whopper",
+                            Price = 4.0,
+                            Weight = 426
+                        });
                 });
 
             modelBuilder.Entity("Restaraunt.Domain.Entities.Drink", b =>

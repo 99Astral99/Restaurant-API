@@ -19,6 +19,7 @@ namespace Restaraunt.Persistence
 			services.AddScoped<IProductDbContext>(provider =>
 				provider.GetService<ProductDbContext>());
 
+
 			return services;
 		}
 	}
