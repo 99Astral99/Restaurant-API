@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Restaraunt.Application.Extensions;
 using Restaraunt.Application.Interfaces;
+using Restaraunt.Domain.Entities;
 using Restaraunt.Domain.Entities.Identity;
 using Restaraunt.Persistence;
 using Restaraunt.WebApi.Models.Identity;
@@ -97,6 +98,9 @@ namespace Restaraunt.WebApi.Controllers
 			var findUser = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
 
 			if (findUser == null) throw new Exception($"User {request.Email} not found");
+
+			var cart = new Cart() { UserId = findUser.Id };
+			await _context.Carts.AddAsync(cart);
 
 			await _userManager.AddToRoleAsync(findUser, RoleConsts.Customer);
 
