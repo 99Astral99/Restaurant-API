@@ -15,13 +15,12 @@ namespace Restaraunt.Application.Products.Burgers.Commands.DeleteBurger
         public async Task<Unit> Handle(DeleteBurgerCommand request,
             CancellationToken cancellationToken)
         {
-
             var entity = await _context.Burgers
-                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.id, cancellationToken);
 
-            if (entity is null || entity.Id != request.Id)
+            if (entity is null || entity.Id != request.id)
             {
-                throw new NotFoundException(nameof(Burger), request.Id);
+                throw new NotFoundException(nameof(Burger), request.id);
             }
 
             _context.Burgers.Remove(entity);

@@ -8,7 +8,6 @@ using Restaraunt.Application.Products.Burgers.Queries.GetBurgerList;
 namespace Restaraunt.WebApi.Controllers
 {
 	[ApiController]
-	[Route("api/[controller]")]
 	public class BurgerController : BaseController
 	{
 		[HttpGet]

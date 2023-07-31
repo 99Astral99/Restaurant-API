@@ -7,7 +7,6 @@ using Restaraunt.Application.Products.Drinks.Queries.GetDrinkList;
 
 namespace Restaraunt.WebApi.Controllers
 {
-	[Route("api/[controller]")]
 	[ApiController]
 	public class DrinkController : BaseController
 	{

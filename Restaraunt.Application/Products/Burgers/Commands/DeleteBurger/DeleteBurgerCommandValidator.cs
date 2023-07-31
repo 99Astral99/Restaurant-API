@@ -7,7 +7,7 @@ namespace Restaraunt.Application.Products.Burgers.Commands.DeleteBurger
 		public DeleteBurgerCommandValidator()
 		{
 			RuleFor(deleteburgerCommand =>
-				deleteburgerCommand.Id).NotEmpty();
+				deleteburgerCommand.id).NotEmpty();
 		}
 	}
 }
