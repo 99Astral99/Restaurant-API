@@ -9,10 +9,13 @@ using Restaraunt.Persistence.EntityTypeConfiguration;
 
 namespace Restaraunt.Persistence
 {
-	public class ProductDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IProductDbContext
+	public class ProductDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>,
+		IProductDbContext, ICustomerDbContext
 	{
 		public DbSet<Drink> Drinks { get; set; }
 		public DbSet<Burger> Burgers { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<Cart> Carts { get; set; }
 		public ProductDbContext(DbContextOptions<ProductDbContext> options)
 			: base(options) { }
 
@@ -20,7 +23,10 @@ namespace Restaraunt.Persistence
 		{
 			builder.ApplyConfiguration(new DrinkTypeConfiguration());
 			builder.ApplyConfiguration(new BurgerTypeConfiguration());
-			//builder.ApplyConfiguration(new UserTypeConfiguration());
+			builder.ApplyConfiguration(new OrderTypeConfiguration());
+			builder.ApplyConfiguration(new CartTypeConfiguration());
+			builder.ApplyConfiguration(new UserTypeConfiguration());
+
 			builder.Entity<IdentityRole<Guid>>().HasData(
 				new IdentityRole<Guid>
 				{
