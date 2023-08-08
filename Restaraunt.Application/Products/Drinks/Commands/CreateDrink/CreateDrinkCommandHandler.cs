@@ -5,13 +5,13 @@ using Restaraunt.Domain.Entities;
 namespace Restaraunt.Application.Products.Drinks.Commands.CreateDrink
 {
 	public class CreateDrinkCommandHandler
-		: IRequestHandler<CreateDrinkCommand, int>
+		: IRequestHandler<CreateDrinkCommand, Guid>
 	{
 		private readonly IProductDbContext _context;
 		public CreateDrinkCommandHandler(IProductDbContext context) =>
 			_context = context;
 
-		public async Task<int> Handle(CreateDrinkCommand request,
+		public async Task<Guid> Handle(CreateDrinkCommand request,
 			CancellationToken cancellationToken)
 		{
 			var drink = new Drink

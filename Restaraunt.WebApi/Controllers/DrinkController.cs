@@ -20,7 +20,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<DrinkDetailsVm>> Get(int id)
+		public async Task<ActionResult<DrinkDetailsVm>> Get(Guid id)
 		{
 			var query = new GetDrinkDetailsQuery(id);
 			var vm = await Mediator.Send(query);
@@ -29,7 +29,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<int>> Create([FromBody] CreateDrinkCommand command)
+		public async Task<ActionResult<Guid>> Create([FromBody] CreateDrinkCommand command)
 		{
 			var drinkId = await Mediator.Send(command);
 			return drinkId;
@@ -43,7 +43,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete(Guid id)
 		{
 			var command = new DeleteDrinkCommand(id);
 			await Mediator.Send(command);

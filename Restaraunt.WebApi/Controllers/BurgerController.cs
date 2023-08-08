@@ -20,7 +20,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<BurgerDetailsVm>> Get(int id)
+		public async Task<ActionResult<BurgerDetailsVm>> Get(Guid id)
 		{
 			var query = new GetBurgerDetailsQuery(id);
 			var vm = await Mediator.Send(query);
@@ -29,7 +29,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<int>> Create([FromBody] CreateBurgerCommand command)
+		public async Task<ActionResult<Guid>> Create([FromBody] CreateBurgerCommand command)
 		{
 			var burgerId = await Mediator.Send(command);
 			return burgerId;
@@ -43,7 +43,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete(Guid id)
 		{
 			var command = new DeleteBurgerCommand(id);
 			await Mediator.Send(command);

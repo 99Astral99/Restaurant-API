@@ -10,8 +10,8 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 		{
 			builder.HasKey(x => x.Id);
 			builder.HasIndex(x => x.Id).IsUnique();
-			builder.Property(x => x.Name).HasMaxLength(50);
-			builder.Property(x => x.Description).HasMaxLength(700);
+			builder.Property(x => x.Name).HasMaxLength(100);
+			builder.Property(x => x.Description).HasMaxLength(1500);
 		}
 	}
 }

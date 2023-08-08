@@ -6,7 +6,7 @@ namespace Restaraunt.Application.Products.Burgers.Queries.GetBurgerList
 {
 	public sealed class BurgerLookupDto : IMapWith<Burger>
 	{
-		public int Id { get; set; }
+		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public double Price { get; set; }
 		public int Weight { get; set; }

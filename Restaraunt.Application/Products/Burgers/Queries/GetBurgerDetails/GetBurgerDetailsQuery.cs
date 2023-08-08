@@ -3,5 +3,5 @@
 namespace Restaraunt.Application.Products.Burgers.Queries.GetBurgerDetails
 {
     public sealed record GetBurgerDetailsQuery
-        (int Id) : IRequest<BurgerDetailsVm>;
+        (Guid Id) : IRequest<BurgerDetailsVm>;
 }

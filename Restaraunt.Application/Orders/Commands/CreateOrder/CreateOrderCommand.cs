@@ -5,7 +5,7 @@ namespace Restaraunt.Application.Orders.Commands
 {
 	public class CreateOrderCommand : IRequest<int>
 	{
-		public int ProductId { get; set; }
+		public Guid ProductId { get; set; }
 		public int Count { get; set; }
 
 		[JsonIgnore]

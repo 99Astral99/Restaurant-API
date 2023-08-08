@@ -5,14 +5,14 @@ using Restaraunt.Domain;
 namespace Restaraunt.Application.Products.Burgers.Commands.CreateBurger
 {
     public class CreateBurgerCommandHandler
-        : IRequestHandler<CreateBurgerCommand, int>
+        : IRequestHandler<CreateBurgerCommand, Guid>
     {
         private readonly IProductDbContext _context;
         public CreateBurgerCommandHandler(IProductDbContext context) =>
             _context = context;
 
 
-        public async Task<int> Handle(CreateBurgerCommand request,
+        public async Task<Guid> Handle(CreateBurgerCommand request,
             CancellationToken cancellationToken)
         {
             var burger = new Burger

@@ -3,7 +3,7 @@
 namespace Restaraunt.Application.Products.Drinks.Commands.UpdateDrink
 {
 	public sealed record UpdateDrinkCommand
-		(int Id,
+		(Guid Id,
 		string Name,
 		string Description,
 		double Price,

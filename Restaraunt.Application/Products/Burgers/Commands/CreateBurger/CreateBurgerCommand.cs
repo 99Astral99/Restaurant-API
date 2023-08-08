@@ -6,5 +6,5 @@ namespace Restaraunt.Application.Products.Burgers.Commands.CreateBurger
         (string Name,
         string Description,
         double Price,
-        int Weight) : IRequest<int>;
+        int Weight) : IRequest<Guid>;
 }

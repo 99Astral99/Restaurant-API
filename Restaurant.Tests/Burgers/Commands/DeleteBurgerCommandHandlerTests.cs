@@ -32,7 +32,7 @@ namespace Restaurant.Tests.Burgers.Commands
 			//Assert
 			await Assert.ThrowsAsync<NotFoundException>(async () =>
 			await handler.Handle(
-				new DeleteBurgerCommand(Context.Burgers.Max(burger => burger.Id + 1)),
+				new DeleteBurgerCommand(new Guid("{4851A049-BECD-469D-A191-24D078E52753}")),
 				CancellationToken.None));
 		}
 	}

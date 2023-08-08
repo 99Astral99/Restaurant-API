@@ -3,7 +3,7 @@
 namespace Restaraunt.Application.Products.Burgers.Commands.UpdateBurger
 {
     public sealed record UpdateBurgerCommand
-        (int Id,
+        (Guid Id,
         string Name,
         string Description,
         double Price,

@@ -6,7 +6,7 @@ namespace Restaraunt.Application.Products.Drinks.Queries.GetDrinkList
 {
 	public sealed class DrinkLookupDto : IMapWith<Drink>
 	{
-		public int Id { get; set; }
+		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public double Price { get; set; }
 		public int Size { get; set; }

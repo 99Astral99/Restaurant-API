@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,14 +30,34 @@ namespace Restaraunt.Application.Orders.Queries
 			if (user is null || user.UserName != request.userName)
 				throw new NotFoundException(nameof(User), request.userName);
 
-			//var orders = user.Cart?.Orders;
+			var orders = user.Cart?.Orders;
 
-			var orderListVm = await _customerContext.Orders
-				.Where(x => x.CartId == user.Cart.Id)
-				.ProjectTo<OrderLookupDto>(_mapper.ConfigurationProvider)
-				.ToListAsync(cancellationToken);
+			var burgersQuery = from o in orders
+							   join p in _productContext.Burgers on o.ProductId equals p.Id
+							   select new OrderLookupDto
+							   {
+								   Id = o.Id,
+								   ProductId = o.ProductId,
+								   ProductName = p.Name,
+								   ProductPrice = p.Price * o.Count,
+								   Count = o.Count,
 
-			return new OrderListVm { Orders = orderListVm };
+							   };
+
+			var drinksQuery = from o in orders
+							  join p in _productContext.Drinks on o.ProductId equals p.Id
+							  select new OrderLookupDto
+							  {
+								  Id = o.Id,
+								  ProductId = o.ProductId,
+								  ProductName = p.Name,
+								  ProductPrice = p.Price * o.Count,
+								  Count = o.Count
+							  };
+
+			var res = burgersQuery.Union(drinksQuery).ToList();
+
+			return new OrderListVm { Orders = res };
 		}
 	}
 }

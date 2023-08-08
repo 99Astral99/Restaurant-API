@@ -12,12 +12,12 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 
 			builder.HasKey(x => x.Id);
 			builder.HasIndex(x => x.Id).IsUnique();
-			builder.Property(x => x.Name).HasMaxLength(50);
-			builder.Property(x => x.Description).HasMaxLength(700);
+			builder.Property(x => x.Name).HasMaxLength(100);
+			builder.Property(x => x.Description).HasMaxLength(1500);
 
 			builder.HasData(new Drink
 			{
-				Id = 1,
+				Id = new Guid("386E32B2-4E94-4E2B-A993-9C4465E2AF71"),
 				Name = "Capuccino",
 				Description = "A fragrant coffee drink with a delicate milk foam.",
 				Price = 1.75,
@@ -27,7 +27,7 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 
 			builder.HasData(new Drink
 			{
-				Id = 2,
+				Id = new Guid("BF4027A2-DB69-4284-ADFE-BF4DB7B1822A"),
 				Name = "Coffee glace",
 				Description = "Natural freshly brewed coffee with ice cream.",
 				Price = 1.55,
@@ -37,7 +37,7 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 
 			builder.HasData(new Drink
 			{
-				Id = 3,
+				Id = new Guid("E07EA736-9D72-4594-A1DC-4EAB4C49B6EF"),
 				Name = "Beer",
 				Description = "A reall fresh beer.",
 				Price = 3,

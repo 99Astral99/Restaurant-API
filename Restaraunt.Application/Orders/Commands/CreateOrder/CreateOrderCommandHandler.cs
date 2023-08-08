@@ -26,19 +26,32 @@ namespace Restaraunt.Application.Orders.Commands
 			if (user is null || user.UserName != request.UserName)
 				throw new NotFoundException(nameof(User), request.UserName);
 
-			var order = new Order
+			var existOrder = await _context.Orders.FirstOrDefaultAsync(x => x.ProductId == request.ProductId);
+			if (existOrder != null)
 			{
-				ProductId = request.ProductId,
-				CartId = user.Cart.Id,
-				Count = request.Count,
-				DateCreated = DateTime.UtcNow,
-				UserName = request.UserName,
-			};
+				existOrder.Count += request.Count;
+			}
 
-			await _context.Orders.AddAsync(order, cancellationToken);
+			else
+			{
+				var order = new Order
+				{
+					ProductId = request.ProductId,
+					CartId = user.Cart.Id,
+					Count = request.Count,
+					DateCreated = DateTime.UtcNow,
+					UserName = request.UserName,
+				};
+
+				await _context.Orders.AddAsync(order, cancellationToken);
+				await _context.SaveChangesAsync(cancellationToken);
+
+				return order.Id;
+			}
+
 			await _context.SaveChangesAsync(cancellationToken);
-
-			return order.Id;
+			return existOrder.Id;
 		}
+
 	}
 }

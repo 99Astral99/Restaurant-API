@@ -19,10 +19,6 @@ namespace Restaraunt.Application.Orders.Commands.DeleteOrder
 				.Select(x => x.Cart.Orders.FirstOrDefault(x => x.Id == request.id))
 				.FirstOrDefaultAsync(x => x.Id == request.id, cancellationToken);
 
-			//		var order = _orderRepository.GetAll()
-			//.Select(x => x.Cart.Orders.FirstOrDefault(x => x.Id == id))
-			//.FirstOrDefault(x => x.Id == id);
-
 			if (entity is null || entity.Id != request.id)
 			{
 				throw new NotFoundException(nameof(Burger), request.id);

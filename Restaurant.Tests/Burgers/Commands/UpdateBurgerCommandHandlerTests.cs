@@ -41,7 +41,7 @@ namespace Restaurant.Tests.Burgers.Commands
 			//Act
 			//Assert
 			await Assert.ThrowsAsync<NotFoundException>(async () =>
-			await handler.Handle(new UpdateBurgerCommand(Context.Burgers.Max(x => x.Id + 1),
+			await handler.Handle(new UpdateBurgerCommand(new Guid("2B6F8EB3-178B-40D2-A06B-AF5990E419D0"),
 			burgerName, burgerDescription, burgerPrice, burgerWeight), CancellationToken.None));
 		}
 	}
