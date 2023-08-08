@@ -30,7 +30,7 @@ namespace Restaraunt.WebApi.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult<OrderListVm>> UpdateOrder(UpdateOrderCommand command)
+		public async Task<ActionResult<OrderListVm>> Update(UpdateOrderCommand command)
 		{
 			await Mediator.Send(command);
 			return NoContent();
