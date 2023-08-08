@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Restaraunt.Application.Orders.Commands;
 using Restaraunt.Application.Orders.Commands.DeleteOrder;
+using Restaraunt.Application.Orders.Commands.UpdateOrder;
 using Restaraunt.Application.Orders.Queries;
 
 namespace Restaraunt.WebApi.Controllers
@@ -26,6 +27,13 @@ namespace Restaraunt.WebApi.Controllers
 			var vm = await Mediator.Send(query);
 
 			return Ok(vm);
+		}
+
+		[HttpPut]
+		public async Task<ActionResult<OrderListVm>> UpdateOrder(UpdateOrderCommand command)
+		{
+			await Mediator.Send(command);
+			return NoContent();
 		}
 
 		[HttpPost]
