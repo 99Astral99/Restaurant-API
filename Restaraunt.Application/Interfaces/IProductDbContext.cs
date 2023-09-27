@@ -8,6 +8,7 @@ namespace Restaraunt.Application.Interfaces
 	{
 		DbSet<Burger> Burgers { get; set; }
 		DbSet<Drink> Drinks { get; set; }
+
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}
 }

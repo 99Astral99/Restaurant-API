@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Restaraunt.Domain.Entities.Identity;
 
@@ -12,6 +13,7 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 		   .WithOne(x => x.User)
 		   .HasPrincipalKey<User>(x => x.Id)
 		   .OnDelete(DeleteBehavior.Cascade);
+
 			#region UserSeed
 			//var user1 = new User()
 			//{
@@ -20,7 +22,7 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 			//	EmailConfirmed = true,
 			//	UserName = "Customer111",
 			//	NormalizedUserName = "CUSTOMER111",
-			//	AccessFailedCount = 0,
+			//	ConcurrencyStamp = Guid.NewGuid().ToString(),
 			//};
 
 			//var user2 = new User()
@@ -30,7 +32,7 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 			//	EmailConfirmed = true,
 			//	UserName = "Admin111",
 			//	NormalizedUserName = "ADMIN111",
-			//	//AccessFailedCount = 0,
+			//	ConcurrencyStamp = Guid.NewGuid().ToString()
 			//};
 
 			//PasswordHasher<User> ph = new PasswordHasher<User>();

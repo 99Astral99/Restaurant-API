@@ -11,8 +11,6 @@ namespace Restaraunt.Persistence.EntityTypeConfiguration
 			builder.ToTable("Orders").HasKey(i => i.Id);
 			builder.HasKey(i => i.Id);
 
-			//builder.Property(o => o.ProductPrice).IsRequired().HasMaxLength(50000);
-			//builder.Property(o => o.ProductName).IsRequired().HasMaxLength(1500);
 			builder.Property(o => o.ProductId).IsRequired();
 
 			builder.HasOne(u => u.Cart)
