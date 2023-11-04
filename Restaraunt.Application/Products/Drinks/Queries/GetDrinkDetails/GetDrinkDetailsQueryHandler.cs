@@ -12,8 +12,8 @@ namespace Restaraunt.Application.Products.Drinks.Queries.GetDrinkDetails
 	{
 		private readonly IProductDbContext _context;
 		private readonly IMapper _mapper;
-		public GetDrinkDetailsQueryHandler(IProductDbContext context, IMapper mapper) =>
-			 (_context, _mapper) = (context, mapper);
+		public GetDrinkDetailsQueryHandler(IMapper mapper, IProductDbContext context) =>
+			 (_mapper, _context) = (mapper, context);
 
 
 		public async Task<DrinkDetailsVm> Handle(GetDrinkDetailsQuery request,
