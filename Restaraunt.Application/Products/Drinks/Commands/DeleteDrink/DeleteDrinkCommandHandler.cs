@@ -7,7 +7,7 @@ using Restaraunt.Domain.Entities;
 
 namespace Restaraunt.Application.Products.Drinks.Commands.DeleteDrink
 {
-	internal class DeleteDrinkCommandHandler :
+	public class DeleteDrinkCommandHandler :
 		IRequestHandler<DeleteDrinkCommand, Unit>
 	{
 		private readonly IProductDbContext _context;

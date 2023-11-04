@@ -6,7 +6,7 @@ using Shouldly;
 
 namespace Restaurant.Tests.Burgers.Queries
 {
-	[Collection("QueryCollection")]
+	[Collection("QueryBurgerCollection")]
 	public class GetBurgerDetailsQueryHandlerTests
 	{
 		private readonly ProductDbContext Context;

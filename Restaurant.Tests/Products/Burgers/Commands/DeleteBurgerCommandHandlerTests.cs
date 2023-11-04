@@ -28,7 +28,7 @@ namespace Restaurant.Tests.Burgers.Commands
 		{
 			//Arrange
 			var handler = new DeleteBurgerCommandHandler(Context);
-			//Act
+
 			//Assert
 			await Assert.ThrowsAsync<NotFoundException>(async () =>
 			await handler.Handle(
