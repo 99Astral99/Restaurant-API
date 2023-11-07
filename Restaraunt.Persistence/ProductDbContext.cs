@@ -16,6 +16,8 @@ namespace Restaraunt.Persistence
 		public DbSet<Burger> Burgers { get; set; }
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<Cart> Carts { get; set; }
+		public DbSet<ReservationTable> ReservationTables { get; set; }
+		public DbSet<BookingTableOrder> BookingTableOrders { get; set; }
 		public ProductDbContext(DbContextOptions<ProductDbContext> options)
 			: base(options) { }
 
@@ -23,9 +25,14 @@ namespace Restaraunt.Persistence
 		{
 			builder.ApplyConfiguration(new DrinkTypeConfiguration());
 			builder.ApplyConfiguration(new BurgerTypeConfiguration());
+
 			builder.ApplyConfiguration(new OrderTypeConfiguration());
 			builder.ApplyConfiguration(new CartTypeConfiguration());
 			builder.ApplyConfiguration(new UserTypeConfiguration());
+
+			builder.ApplyConfiguration(new BookingTableOrderTypeConfiguration());
+			builder.ApplyConfiguration(new ReservationTableTypeConfiguration());
+
 
 			builder.Entity<IdentityRole<Guid>>().HasData(
 				new IdentityRole<Guid>

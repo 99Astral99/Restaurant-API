@@ -1,0 +1,42 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Restaraunt.Application.BookingTableOrders.Commands.CreateBookingTableOrder;
+using Restaraunt.Application.BookingTableOrders.Commands.DeleteBookingTableOrder;
+using Restaraunt.Application.BookingTableOrders.Commands.UpdateBookingTableOrder;
+using Restaraunt.Application.BookingTableOrders.Queries.GetBookingTableOrder;
+
+namespace Restaraunt.WebApi.Controllers
+{
+	[ApiController]
+	public class BookingTableOrderController : BaseController
+	{
+		[HttpGet]
+		public async Task<ActionResult<BookingTableOrderListVm>> GetAll()
+		{
+			var query = new GetBookingTableOrderListQuery();
+			var vm = await Mediator.Send(query);
+			return vm;
+		}
+
+		[HttpPost]
+		public async Task<ActionResult<Guid>> Create([FromBody] CreateBookingTableOrderCommand command)
+		{
+			var bookingTableOrderId = await Mediator.Send(command);
+			return bookingTableOrderId;
+		}
+
+		[HttpDelete]
+		public async Task<IActionResult> Delete(Guid Id)
+		{
+			var command = new DeleteBookingTableOrderCommand(Id);
+			await Mediator.Send(command);
+			return NoContent();
+		}
+
+		[HttpPut]
+		public async Task<IActionResult> Update([FromBody] UpdateBookingTableOrderCommand command)
+		{
+			await Mediator.Send(command);
+			return NoContent();
+		}
+	}
+}

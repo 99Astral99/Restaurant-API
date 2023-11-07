@@ -28,6 +28,6 @@ namespace Restaurant.Tests.Common.Burgers
 		}
 	}
 
-	[CollectionDefinition("QueryCollection")]
-	public class QueryCollection : ICollectionFixture<QueryBurgerTestFixture> { }
+	[CollectionDefinition("QueryBurgerCollection")]
+	public class QueryBurgerCollection : ICollectionFixture<QueryBurgerTestFixture> { }
 }

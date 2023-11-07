@@ -249,6 +249,37 @@ namespace Restaraunt.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Restaraunt.Domain.Entities.BookingTableOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ReservationTableId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ReservedPeopleAmount")
+                        .HasMaxLength(10)
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TableNumber")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationTableId")
+                        .IsUnique();
+
+                    b.ToTable("BookingTableOrders");
+                });
+
             modelBuilder.Entity("Restaraunt.Domain.Entities.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -434,6 +465,66 @@ namespace Restaraunt.Persistence.Migrations
                     b.ToTable("Orders", (string)null);
                 });
 
+            modelBuilder.Entity("Restaraunt.Domain.Entities.ReservationTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsReserved")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Number")
+                        .IsUnique();
+
+                    b.ToTable("ReservationTables");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsReserved = false,
+                            Number = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsReserved = false,
+                            Number = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsReserved = false,
+                            Number = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsReserved = false,
+                            Number = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsReserved = false,
+                            Number = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsReserved = false,
+                            Number = 6
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -485,6 +576,17 @@ namespace Restaraunt.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Restaraunt.Domain.Entities.BookingTableOrder", b =>
+                {
+                    b.HasOne("Restaraunt.Domain.Entities.ReservationTable", "ReservationTable")
+                        .WithOne("BookingTableOrder")
+                        .HasForeignKey("Restaraunt.Domain.Entities.BookingTableOrder", "ReservationTableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReservationTable");
+                });
+
             modelBuilder.Entity("Restaraunt.Domain.Entities.Cart", b =>
                 {
                     b.HasOne("Restaraunt.Domain.Entities.Identity.User", "User")
@@ -515,6 +617,12 @@ namespace Restaraunt.Persistence.Migrations
             modelBuilder.Entity("Restaraunt.Domain.Entities.Identity.User", b =>
                 {
                     b.Navigation("Cart")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Restaraunt.Domain.Entities.ReservationTable", b =>
+                {
+                    b.Navigation("BookingTableOrder")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

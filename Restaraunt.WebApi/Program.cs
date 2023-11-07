@@ -57,6 +57,8 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddHealthChecks();
 builder.Services.AddControllers();
 
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 builder.Services.AddAuthentication(opt =>
 {
 	opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
