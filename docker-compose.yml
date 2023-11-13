@@ -1,0 +1,42 @@
+version: '3.4'
+
+networks:
+  backend:
+   driver: bridge
+
+services:
+  restaraunt.webapi:
+    image: ${DOCKER_REGISTRY-}restaraunt.webapi
+    container_name: restaurant-webapi
+    build:
+      context: .
+      dockerfile: Restaraunt.WebApi/Dockerfile
+    environment:
+     POSTGRES_DB: "RestaurantDb"
+     POSTGRES_USER: "postgres"
+     POSTGRES_PASSWORD: "master"
+     POSTGRES_HOST: restaurantdb
+    ports:
+     - "8080:80"
+    depends_on:
+     - restaurantdb
+    networks:
+     - backend
+
+  restaurantdb:
+    container_name: "restaurant-db"
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    networks: 
+      - backend
+    environment:
+     POSTGRES_DB: "RestaurantDb"
+     POSTGRES_USER: "postgres"
+     POSTGRES_PASSWORD: "master"
+     POSTGRES_HOST: restaurantdb
+    volumes:
+      - postgres-data:/var/lib/postgresql
+
+volumes:
+  postgres-data: {}
