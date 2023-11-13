@@ -16,6 +16,9 @@ namespace Restaraunt.Persistence
 			var dbPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
 			var dbName = Environment.GetEnvironmentVariable("POSTGRES_DB");
 			var connectionString = $"Host={dbHost};User Id={dbUser};Password={dbPassword};Port=5432;Database={dbName}";
+			
+			//if you'll want to use a localhost
+			//var connectionString = configuration["ConnectionStrings:pg-connection"];
 
 			services.AddDbContext<ProductDbContext>(options =>
 			{
