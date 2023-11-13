@@ -17,6 +17,7 @@ This is an application that represents a restaurant developed on .NET 7 platform
 
 ### Software
 - Swagger
+- Docker
 
 
 ## What does it do?
