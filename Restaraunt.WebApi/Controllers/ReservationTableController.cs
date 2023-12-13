@@ -8,10 +8,11 @@ using Restaraunt.Application.ReservationTables.Queries.GetReservedTableList;
 
 namespace Restaraunt.WebApi.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
 	[ApiController]
 	public class ReservationTableController : BaseController
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<ActionResult<ReservationTableListVm>> GetAll()
 		{
@@ -30,6 +31,7 @@ namespace Restaraunt.WebApi.Controllers
 			return vm;
 		}
 
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<ActionResult<ReservationTableListVm>> GetAllUnreserved()
 		{
@@ -39,6 +41,7 @@ namespace Restaraunt.WebApi.Controllers
 			return vm;
 		}
 
+		
 		[HttpPost]
 		public async Task<ActionResult<int>> Create([FromBody] CreateReservationTableCommand command)
 		{

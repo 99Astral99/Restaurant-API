@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace Restaraunt.WebApi.Controllers
 {
-	[AllowAnonymous]
+	[Authorize]
 	[Route("api/[controller]")]
 	public class AccountController : BaseController
 	{
@@ -60,7 +60,7 @@ namespace Restaraunt.WebApi.Controllers
 			});
 		}
 
-		[Authorize(Roles = "Administrator")]
+		[Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
 		[HttpPost]
 		[Route("revoke/{username}")]
 		public async Task<IActionResult> Revoke(string username)
@@ -74,7 +74,7 @@ namespace Restaraunt.WebApi.Controllers
 			return Ok();
 		}
 
-		[Authorize]
+		[Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
 		[HttpPost]
 		[Route("revoke-all")]
 		public async Task<IActionResult> RevokeAll()

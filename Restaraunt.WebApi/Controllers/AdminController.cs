@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Restaraunt.Application.Extensions;
@@ -10,6 +11,7 @@ using Restaraunt.WebApi.Models.Identity;
 
 namespace Restaraunt.WebApi.Controllers
 {
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	public class AdminController : BaseController
 	{

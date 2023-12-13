@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Restaraunt.Application.BookingTableOrders.Commands.CreateBookingTableOrder;
 using Restaraunt.Application.BookingTableOrders.Commands.DeleteBookingTableOrder;
 using Restaraunt.Application.BookingTableOrders.Commands.UpdateBookingTableOrder;
@@ -6,6 +7,7 @@ using Restaraunt.Application.BookingTableOrders.Queries.GetBookingTableOrder;
 
 namespace Restaraunt.WebApi.Controllers
 {
+	[Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
 	[ApiController]
 	public class BookingTableOrderController : BaseController
 	{
@@ -17,6 +19,7 @@ namespace Restaraunt.WebApi.Controllers
 			return vm;
 		}
 
+		[AllowAnonymous]
 		[HttpPost]
 		public async Task<ActionResult<Guid>> Create([FromBody] CreateBookingTableOrderCommand command)
 		{
@@ -24,6 +27,7 @@ namespace Restaraunt.WebApi.Controllers
 			return bookingTableOrderId;
 		}
 
+		[AllowAnonymous]
 		[HttpDelete]
 		public async Task<IActionResult> Delete(Guid Id)
 		{
