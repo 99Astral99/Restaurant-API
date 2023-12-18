@@ -29,6 +29,24 @@ namespace Restaraunt.WebApi.Controllers
 			_configuration = configuration;
 		}
 
+		/// <summary>
+		/// Login user in the application
+		/// </summary>
+		/// <remarks>
+		/// Sample request:
+		/// POST /login
+		/// {
+		///	  Email: "default@gmail.ru",
+		///	  Password: "DefaultPassword1111$"
+		/// }
+		/// </remarks>
+		/// <paramref name="request">AuthRequest object</paramref>
+		/// <returns>Returns AuthResponse with jwt token</returns>
+		/// <response code="200">Success</response>
+		/// <response code="400">Bad request if the credentials were entered incorrectly </response>
+		[HttpPost]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[HttpPost("login")]
 		public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
 		{
@@ -74,6 +92,23 @@ namespace Restaraunt.WebApi.Controllers
 			});
 		}
 
+		/// <summary>
+		/// Registers user in the application
+		/// </summary>
+		/// <remarks>
+		/// Sample request:
+		/// POST /register
+		/// {
+		///	  Email: "default@gmail.ru",
+		///	  UserName:"Viktor",
+		///	  Password: "DefaultPassword1111$",
+		///	  PasswordConfirm: "DefaultPassword1111$"
+		/// }
+		/// </remarks>
+		/// <paramref name="request">RegisterRequest object</paramref>
+		/// <returns>Returns AuthResponse with jwt token</returns>
+		/// <response code="200">Success</response>
+		/// <response code="400">Bad request if the credentials were entered incorrectly </response>
 		[HttpPost("register")]
 		public async Task<ActionResult<AuthResponse>> Register([FromBody] RegisterRequest request)
 		{
