@@ -17,6 +17,7 @@ namespace Restaraunt.Application.Reservation_Tables.Queries.GetUnreservedTableLi
 			CancellationToken cancellationToken)
 		{
 			var unreservedTableQuery = await _context.ReservationTables
+				.AsNoTracking()
 				.Where(x => x.IsReserved == false)
 				.ProjectTo<ReservationTableLookupDto>(_mapper.ConfigurationProvider)
 				.OrderBy(x => x.Number)

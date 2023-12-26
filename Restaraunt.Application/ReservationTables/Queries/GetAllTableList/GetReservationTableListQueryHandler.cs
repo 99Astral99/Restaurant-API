@@ -18,6 +18,7 @@ namespace Restaraunt.Application.Reservation_Tables.Queries
 			CancellationToken cancellationToken)
 		{
 			var reservationTablesQuery = await _context.ReservationTables
+				.AsNoTracking()
 				.ProjectTo<ReservationTableLookupDto>(_mapper.ConfigurationProvider)
 				.OrderBy(x => x.Number)
 				.ToListAsync(cancellationToken);

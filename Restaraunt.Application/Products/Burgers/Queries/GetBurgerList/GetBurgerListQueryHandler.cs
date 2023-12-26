@@ -14,10 +14,12 @@ namespace Restaraunt.Application.Products.Burgers.Queries.GetBurgerList
 		public GetBurgerListQueryHandler(IMapper mapper, IProductDbContext context) =>
 			(_mapper, _context) = (mapper, context);
 
+
 		public async Task<BurgerListVm> Handle(GetBurgerListQuery request,
 			CancellationToken cancellationToken)
 		{
 			var burgersQuery = await _context.Burgers
+				.AsNoTracking()
 				.ProjectTo<BurgerLookupDto>(_mapper.ConfigurationProvider)
 				.ToListAsync(cancellationToken);
 

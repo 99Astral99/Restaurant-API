@@ -23,6 +23,7 @@ namespace Restaraunt.Application.Orders.Queries
 			CancellationToken cancellationToken)
 		{
 			var user = await _userManager.Users
+				.AsNoTracking()
 				.Include(x => x.Cart)
 				.ThenInclude(x => x.Orders)
 				.FirstOrDefaultAsync(x => x.UserName == request.userName);

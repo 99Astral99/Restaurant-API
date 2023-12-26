@@ -19,6 +19,7 @@ namespace Restaraunt.Application.Products.Burgers.Queries.GetBurgerDetails
             CancellationToken cancellationToken)
         {
             var entity = await _context.Burgers
+                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity is null || entity.Id != request.Id)

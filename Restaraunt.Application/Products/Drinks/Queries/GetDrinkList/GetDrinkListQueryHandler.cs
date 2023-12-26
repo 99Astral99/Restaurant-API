@@ -18,6 +18,7 @@ namespace Restaraunt.Application.Products.Drinks.Queries.GetDrinkList
 			CancellationToken cancellationToken)
 		{
 			var drinksQuery = await _context.Drinks
+				.AsNoTracking()
 				.ProjectTo<DrinkLookupDto>(_mapper.ConfigurationProvider)
 				.ToListAsync(cancellationToken);
 
