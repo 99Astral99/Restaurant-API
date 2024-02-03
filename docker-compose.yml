@@ -11,11 +11,6 @@ services:
     build:
       context: .
       dockerfile: Restaraunt.WebApi/Dockerfile
-    environment:
-     POSTGRES_DB: "RestaurantDb"
-     POSTGRES_USER: "postgres"
-     POSTGRES_PASSWORD: "master"
-     POSTGRES_HOST: restaurantdb
     ports:
      - "8080:80"
     depends_on:
@@ -31,9 +26,9 @@ services:
     networks: 
       - backend
     environment:
-     POSTGRES_DB: "RestaurantDb"
+     POSTGRES_DB: "restaurantdb"
      POSTGRES_USER: "postgres"
-     POSTGRES_PASSWORD: "master"
+     POSTGRES_PASSWORD: "postgres"
      POSTGRES_HOST: restaurantdb
     volumes:
       - postgres-data:/var/lib/postgresql
